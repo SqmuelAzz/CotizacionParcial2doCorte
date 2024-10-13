@@ -40,4 +40,3 @@ Este documento especifica los requerimientos funcionales para el sistema de coti
 - El sistema debe verificar que las dimensiones de las naves sean coherentes con el ancho y alto de la ventana.
 - El sistema debe garantizar que el vidrio sea siempre 1.5 cm más pequeño que la nave en cada lado.
 - El sistema debe asegurar que el descuento solo se aplique para más de 100 ventanas del mismo diseño.
-

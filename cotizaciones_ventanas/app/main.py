@@ -1,6 +1,8 @@
+# app/main.py
 from ventana import Ventana
 from cotizacion import Cotizacion
 from cliente import Cliente
+from datetime import date
 
 def mostrar_menu():
     print("1. Crear cotización")
@@ -9,9 +11,10 @@ def mostrar_menu():
 def crear_cotizacion():
     nombre_cliente = input("Ingrese el nombre del cliente: ")
     empresa_cliente = input("Ingrese el nombre de la empresa: ")
-    cantidad_ventanas = int(input("Ingrese la cantidad de ventanas: "))
-    cliente = Cliente(nombre_cliente, empresa_cliente, cantidad_ventanas)
+    direccion_cliente = input("Ingrese la dirección del cliente: ")
+    cliente = Cliente(nombre_cliente, empresa_cliente, direccion_cliente)
 
+    cantidad_ventanas = int(input("Ingrese la cantidad de ventanas: "))
     ventanas = []
     for _ in range(cantidad_ventanas):
         estilo = input("Ingrese el estilo de la ventana (O, XO, OXXO, OXO): ")
@@ -24,7 +27,7 @@ def crear_cotizacion():
         ventana = Ventana(estilo, ancho, alto, acabado, tipo_vidrio, esmerilado)
         ventanas.append(ventana)
     
-    cotizacion = Cotizacion(cliente, ventanas)
+    cotizacion = Cotizacion.get_instance(cliente, ventanas, date.today())
     total = cotizacion.calcular_total()
     
     print(f"Nombre: {nombre_cliente}")

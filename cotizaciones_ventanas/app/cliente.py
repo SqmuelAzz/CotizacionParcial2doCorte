@@ -1,5 +1,6 @@
+# app/cliente.py
 class Cliente:
-    def __init__(self, nombre, empresa, cantidad_ventanas):
+    def __init__(self, nombre: str, empresa: str, direccion: str):
         self.nombre = nombre
         self.empresa = empresa
-        self.cantidad_ventanas = cantidad_ventanas
+        self.direccion = direccion

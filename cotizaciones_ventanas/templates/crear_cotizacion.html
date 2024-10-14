@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cotización</title>
+</head>
+<body>
+    <h1>Crear una nueva Cotización</h1>
+    <form method="POST">
+        <label>Nombre del Cliente:</label><br>
+        <input type="text" name="nombre_cliente" required><br>
+
+        <label>Empresa del Cliente:</label><br>
+        <input type="text" name="empresa_cliente" required><br>
+
+        <label>Dirección del Cliente:</label><br>
+        <input type="text" name="direccion_cliente" required><br>
+
+        <label>Cantidad de Ventanas:</label><br>
+        <input type="number" name="cantidad_ventanas" required><br>
+
+        <!-- se pueden agregar más campos dinámicamente según la cantidad de ventanas -->
+
+        <button type="submit">Crear Cotización</button>
+    </form>
+</body>
+</html>

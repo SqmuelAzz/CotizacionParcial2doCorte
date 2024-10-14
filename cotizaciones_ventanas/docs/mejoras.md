@@ -6,7 +6,7 @@ Este archivo documenta las dos mejoras principales que se implementaron en el si
 
 - **Descripción**: Se crearon tres nuevas clases para gestionar las naves de las ventanas, los tipos de vidrio y los acabados de aluminio de manera independiente. Estas clases están en los archivos `nave.py`, `vidrio.py` y `acabado.py`.
 - **Motivación**: Inicialmente, todo el cálculo de naves, vidrio y acabados se hacía dentro de la clase `Ventana`, lo cual complicaba el mantenimiento y hacía el código menos flexible.
-- **Beneficio**: 
+- **Beneficio**:
   - Aumenta la modularidad y separación de responsabilidades.
   - Facilita la extensión futura del sistema si se añaden más tipos de vidrio o acabados.
   - Simplifica la clase `Ventana`, delegando responsabilidades a las clases correspondientes.

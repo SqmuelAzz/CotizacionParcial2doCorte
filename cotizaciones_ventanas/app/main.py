@@ -1,13 +1,12 @@
-# app/main.py
-
-from ventana import Ventana
-from cotizacion import Cotizacion
-from cliente import Cliente
-from datetime import date
+import threading
 from rich.console import Console
 from rich.table import Table
 from rich.prompt import Prompt
 from flask import Flask, render_template, request
+from ventana import Ventana
+from cotizacion import Cotizacion
+from cliente import Cliente
+from datetime import date
 
 app = Flask(__name__)
 console = Console()
@@ -44,10 +43,12 @@ def crear_cotizacion_texto():
 
         ventana = Ventana(estilo, ancho, alto, acabado, tipo_vidrio, esmerilado)
         ventanas.append(ventana)
-    
+
+    # Crear cotización con descuentos si aplica
     cotizacion = Cotizacion.get_instance(cliente, ventanas, date.today())
     total = cotizacion.calcular_total()
 
+    # Mostrar resultado en la consola
     console.print(f"[bold]Nombre:[/bold] {nombre_cliente}")
     console.print(f"[bold]Empresa:[/bold] {empresa_cliente}")
     console.print(f"[bold]Dirección:[/bold] {direccion_cliente}")
@@ -86,14 +87,27 @@ def crear_cotizacion():
     
     return render_template('crear_cotizacion.html')
 
-# Iniciar la aplicación en modo consola o web
+# Función que ejecuta la interfaz web con Flask
+def iniciar_flask():
+    app.run(debug=True, use_reloader=False)  # Desactiva auto-reload para evitar conflictos con el threading
+
+# Función principal para mostrar el menú inicial
+def mostrar_menu_principal():
+    while True:
+        mostrar_menu()
+        opcion = Prompt.ask("Seleccione una opción", choices=["1", "2", "3"])
+
+        if opcion == "1":
+            crear_cotizacion_texto()
+        elif opcion == "2":
+            console.print("Ejecutando interfaz web... Acceda a [bold cyan]http://127.0.0.1:5000[/bold cyan]", style="bold green")
+            flask_thread = threading.Thread(target=iniciar_flask)
+            flask_thread.daemon = True  # Este hilo se cerrará cuando el programa principal termine
+            flask_thread.start()
+            flask_thread.join()  # Esto asegura que el programa no termine mientras Flask está corriendo
+        elif opcion == "3":
+            console.print("Saliendo del sistema...", style="bold red")
+            break
+
 if __name__ == "__main__":
-    mostrar_menu()
-    opcion = Prompt.ask("Seleccione una opción", default="3")
-    if opcion == '1':
-        crear_cotizacion_texto()
-    elif opcion == '2':
-        console.print("Ejecutando interfaz web... Acceda a [bold cyan]http://127.0.0.1:5000[/bold cyan]", style="bold green")
-        app.run(debug=True)  # Ejecuta Flask para la interfaz web
-    else:
-        console.print("Saliendo del sistema...", style="bold red")
+    mostrar_menu_principal()

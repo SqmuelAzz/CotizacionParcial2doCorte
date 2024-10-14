@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cotización</title>
+    <script>
+        function agregarVentanas() {
+            var cantidad = document.getElementById('cantidad_ventanas').value;
+            var ventanasDiv = document.getElementById('ventanas_div');
+            ventanasDiv.innerHTML = '';  // Limpiar cualquier contenido previo
+
+            for (var i = 0; i < cantidad; i++) {
+                ventanasDiv.innerHTML += `
+                    <h3>Ventana ${i + 1}</h3>
+                    <label>Estilo de la Ventana:</label><br>
+                    <select name="estilo_${i}" required>
+                        <option value="O">O</option>
+                        <option value="XO">XO</option>
+                        <option value="OXXO">OXXO</option>
+                        <option value="OXO">OXO</option>
+                    </select><br>
+
+                    <label>Ancho de la Ventana (cm):</label><br>
+                    <input type="number" name="ancho_${i}" step="0.01" required><br>
+
+                    <label>Alto de la Ventana (cm):</label><br>
+                    <input type="number" name="alto_${i}" step="0.01" required><br>
+
+                    <label>Acabado:</label><br>
+                    <select name="acabado_${i}" required>
+                        <option value="Pulido">Pulido</option>
+                        <option value="Lacado Brillante">Lacado Brillante</option>
+                        <option value="Lacado Mate">Lacado Mate</option>
+                        <option value="Anodizado">Anodizado</option>
+                    </select><br>
+
+                    <label>Tipo de Vidrio:</label><br>
+                    <select name="tipo_vidrio_${i}" required>
+                        <option value="Transparente">Transparente</option>
+                        <option value="Bronce">Bronce</option>
+                        <option value="Azul">Azul</option>
+                    </select><br>
+
+                    <label>Esmerilado:</label><br>
+                    <input type="checkbox" name="esmerilado_${i}"><br>
+                    <hr>
+                `;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Crear una nueva Cotización</h1>
+    <form method="POST">
+        <label>Nombre del Cliente:</label><br>
+        <input type="text" name="nombre_cliente" required><br>
+
+        <label>Empresa del Cliente:</label><br>
+        <input type="text" name="empresa_cliente" required><br>
+
+        <label>Dirección del Cliente:</label><br>
+        <input type="text" name="direccion_cliente" required><br>
+
+        <label>Cantidad de Ventanas:</label><br>
+        <input type="number" id="cantidad_ventanas" name="cantidad_ventanas" min="1" onchange="agregarVentanas()" required><br>
+
+        <div id="ventanas_div"></div>
+
+        <button type="submit">Crear Cotización</button>
+    </form>
+</body>
+</html>

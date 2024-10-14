@@ -93,7 +93,7 @@ if __name__ == "__main__":
     if opcion == '1':
         crear_cotizacion_texto()
     elif opcion == '2':
-        console.print("Ejecutando interfaz web... Acceda a [bold cyan]http://127.0.0.1:5001[/bold cyan]", style="bold green")
-        app.run(debug=True, port=5001)  # Ejecuta Flask para la interfaz web
+        console.print("Ejecutando interfaz web... Acceda a [bold cyan]http://127.0.0.1:5000[/bold cyan]", style="bold green")
+        app.run(debug=True)  # Ejecuta Flask para la interfaz web
     else:
         console.print("Saliendo del sistema...", style="bold red")
